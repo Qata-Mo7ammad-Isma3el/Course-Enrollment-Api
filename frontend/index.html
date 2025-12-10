@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <br><br><br><br><br><br><br>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📚 Course Enrollment System</h1>
+            <p class="subtitle">Manage Students, Courses & Enrollments</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="students">👤 Students</button>
+            <button class="tab-btn" data-tab="courses">📖 Courses</button>
+            <button class="tab-btn" data-tab="enrollments">🎓 Enrollments</button>
+        </div>
+
+        <!-- Students Tab -->
+        <div id="students" class="tab-content active">
+            <div class="section-header">
+                <h2>Students Management</h2>
+                <button class="btn btn-primary" onclick="showAddStudentForm()">+ Add Student</button>
+            </div>
+
+            <!-- Add Student Form -->
+            <div id="addStudentForm" class="form-container hidden">
+                <h3>Add New Student</h3>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label>First Name:</label>
+                        <input type="text" id="studentFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text" id="studentLastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="studentEmail" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAddStudentForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Students List -->
+            <div id="studentsList" class="cards-container"></div>
+        </div>
+
+        <!-- Courses Tab -->
+        <div id="courses" class="tab-content">
+            <div class="section-header">
+                <h2>Courses Management</h2>
+                <button class="btn btn-primary" onclick="showAddCourseForm()">+ Add Course</button>
+            </div>
+
+            <!-- Add Course Form -->
+            <div id="addCourseForm" class="form-container hidden">
+                <h3>Add New Course</h3>
+                <form id="courseForm">
+                    <div class="form-group">
+                        <label>Course Name:</label>
+                        <input type="text" id="courseName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea id="courseDescription" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Credits (1-8):</label>
+                        <input type="number" id="courseCredits" min="1" max="8" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAddCourseForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Courses List -->
+            <div id="coursesList" class="cards-container"></div>
+        </div>
+
+        <!-- Enrollments Tab -->
+        <div id="enrollments" class="tab-content">
+            <div class="section-header">
+                <h2>Enrollments Management</h2>
+                <button class="btn btn-primary" onclick="showAddEnrollmentForm()">+ New Enrollment</button>
+            </div>
+
+            <!-- Add Enrollment Form -->
+            <div id="addEnrollmentForm" class="form-container hidden">
+                <h3>Create New Enrollment</h3>
+                <form id="enrollmentForm">
+                    <div class="form-group">
+                        <label>Student:</label>
+                        <select id="enrollmentStudent" required>
+                            <option value="">Select a student...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Course:</label>
+                        <select id="enrollmentCourse" required>
+                            <option value="">Select a course...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Enrollment Date:</label>
+                        <input type="date" id="enrollmentDate" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Enroll</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAddEnrollmentForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Enrollments List -->
+            <div id="enrollmentsList" class="table-container">
+                <table id="enrollmentsTable">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Course Name</th>
+                            <th>Enrollment Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Modal for Student Details -->
+    <div id="studentModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeStudentModal()">&times;</span>
+            <h2 id="modalStudentName"></h2>
+            <p><strong>Email:</strong> <span id="modalStudentEmail"></span></p>
+            <h3>Enrolled Courses:</h3>
+            <div id="modalStudentCourses"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Course Details -->
+    <div id="courseModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeCourseModal()">&times;</span>
+            <h2 id="modalCourseName"></h2>
+            <p><strong>Description:</strong> <span id="modalCourseDescription"></span></p>
+            <h3>Enrolled Students:</h3>
+            <div id="modalCourseStudents"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
